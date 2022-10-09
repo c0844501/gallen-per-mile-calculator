@@ -1,0 +1,70 @@
+<!-- Sonu Yadav C0844501 MidTerm Exam -->
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">	
+    <title>Calculate MPG</title>
+    <link rel="stylesheet" href="mpg.css">
+    <script>
+
+        "use strict";
+        var $ = function(id) {
+            return document.getElementById(id);
+        };
+        //method to calculate miles per gallon 
+        var calculateMpg = function(miles, gallons) {
+			var mpg = (miles / gallons);
+			mpg = mpg.toFixed(1);
+			return mpg;
+        };
+        //method to accept enteries from the user
+		var processEntries = function(process) {
+            var miles = parseFloat($("miles").value);
+            var gallons = parseFloat($("gallons").value);
+            //checking user enteries validation 
+            if (isNaN(miles) || isNaN(gallons)) {
+                alert("Both entries must be numeric");
+            } else if (miles <= 0 || gallons <= 0) {
+            	alert("Both entries must be greater than zero");
+            } else {
+                //calling of the calculateMpg method
+                $("mpg").value = calculateMpg(miles, gallons);
+            }
+        };
+        //resetting the values
+		var clearEntries = function() {
+			$("miles").value = "";
+			$("gallons").value = "";
+			$("mpg").value = "";
+		};
+        var clearMilesDriven = function() {
+			$("miles").value = "";
+		};
+        var clearGallonsUsed =  function() {
+			$("gallons").value = "";
+		};
+        //Setting the click events and actions 
+		window.onload = function() {
+            $("calculate").onclick = processEntries;
+            $("miles").focus();
+            $('gallons').onfocus = clearGallonsUsed; 
+            $('miles').onfocus = clearMilesDriven;
+            $('mpg').ondblclick = clearEntries;
+            
+        };
+    </script>
+</head>
+<body>
+    <main>
+        <h1>Calculate Miles Per Gallon</h1>
+        <label for="miles">Miles Driven:</label>
+		<input type="text" id="miles" ><br>
+        <label for="gallons">Gallons of Gas Used:</label>
+        <input type="text" id="gallons"><br>
+        <label for="mpg">Miles Per Gallon</label>
+        <input type="text" id="mpg"  onfocusout="processEntries(this)" ><br>
+        <label>&nbsp;</label>
+        <input type="button" id="calculate" value="Calculate MPG"><br>
+    </main>
+</body>
+</html>
